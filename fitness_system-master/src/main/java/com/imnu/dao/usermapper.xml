@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--绑定一个Dao接口-->
+<mapper namespace="com.imnu.dao.usermapper">
+
+    <select id="getUserList"  resultType="com.imnu.pojo.userbean">
+    select * from people.user
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="com.imnu.pojo.userbean">
+    select * from people.user where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.imnu.pojo.userbean">
+    insert into people.user(name,password,phone,address,sex,realname,score,plan,is_coach)
+    values(#{name},#{password},#{phone},#{address},#{sex},#{realname},#{score},#{plan},#{is_coach})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+    delete from people.user where id = #{id}
+    </delete>
+
+    <update id="updatename" parameterType="com.imnu.pojo.userbean">
+    update people.user set name = #{name} where id = #{id}
+    </update>
+
+    <select id="selectIsLive" resultType="int" parameterType="java.lang.String">
+    select count(*) from people.user where name = #{name} and password = #{password}
+    </select>
+
+    <select id="is_exist" resultType="int" parameterType="java.lang.String">
+    select count(*) from people.user where name = #{name}
+    </select>
+
+    <select id="selectByName" resultType="com.imnu.pojo.userbean">
+    select * from people.user where name = #{name}
+    </select>
+
+    <select id="isAdmin" resultType="int" parameterType="java.lang.String">
+    select count(*) from people.user where name = #{name} and password = #{password} and id = 1
+    </select>
+
+    <select id="getsomeuser" parameterType="java.lang.String" resultType="com.imnu.pojo.userbean">
+    select * from people.user where name like concat('%',#{name},'%')
+    </select>
+
+    <select id="isCoach" resultType="int" parameterType="java.lang.String">
+    select count(*) from people.user where name = #{name} and password = #{password} and is_coach = 'Y'
+    </select>
+</mapper>

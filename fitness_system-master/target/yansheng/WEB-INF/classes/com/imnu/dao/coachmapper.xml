@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--绑定一个Dao接口-->
+<mapper namespace="com.imnu.dao.coachmapper">
+    <select id="selectallcoach" resultType="com.imnu.pojo.coachbean" parameterType="java.lang.String">
+    select * from people.coach where name = #{name}
+    </select>
+
+    <insert id="insertCoach" parameterType="java.lang.String" >
+    insert into people.coach (name)
+    values (#{name})
+    </insert>
+
+    <update id="updateCoach" parameterType="com.imnu.pojo.coachbean">
+    update people.coach set sex = #{sex},age = #{age},height = #{height},weight = #{weight},worktime=#{worktime},remark = #{remark},lessontime = #{lessontime},price = #{price}   where name = #{name}
+    </update>
+
+    <select id="selectSomeCoach" resultType="com.imnu.pojo.coachbean" parameterType="java.lang.String">
+    select * from people.coach where name like concat('%',#{name},'%')
+    </select>
+
+    <select id="selectAllcoach" resultType="com.imnu.pojo.coachbean" parameterType="java.lang.String">
+    select * from people.coach
+    </select>
+
+    <select id="selectonecoachnamebyid" parameterType="int" resultType="java.lang.String">
+    select name from people.coach where id = #{id}
+    </select>
+
+
+</mapper>

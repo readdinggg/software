@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--绑定一个Dao接口-->
+<mapper namespace="com.imnu.dao.dingdanmapper">
+
+    <select id="selectalldingdan" resultType="com.imnu.pojo.dingdanbean">
+    select * from people.dingdan
+    </select>
+
+    <select id="selectByUsername" parameterType="java.lang.String" resultType="com.imnu.pojo.dingdanbean">
+    select * from people.dingdan where username = #{username}
+    </select>
+
+    <update id="updatepaymessage" parameterType="int">
+    update people.dingdan set ispay = "是" where id = #{id}
+    </update>
+
+    <update id="updatecomments">
+    update people.dingdan set comments = #{comments} where `id` = #{id}
+    </update>
+
+
+    <insert id="insertdingdan" parameterType="com.imnu.pojo.dingdanbean">
+    insert into people.dingdan(userid,username,coachid,coachname,dingdanid,ispay,comments)
+    values (#{userid},#{username},#{coachid},#{coachname},"996","否","暂未评论")
+    </insert>
+
+    <select id="selectnopaydingdan" parameterType="java.lang.String" resultType="com.imnu.pojo.dingdanbean">
+    select * from people.dingdan where username = #{name} and ispay = "否"
+    </select>
+</mapper>
